@@ -1,0 +1,99 @@
+<div class="container" style="margin-top: 1vw;">
+    <div class="row justify-content-center">
+        <div class="col-sm-8 align-self-center text-center">
+            <h1>FORO</h1>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 2vw;">
+
+    <table class="table">
+        <thead *ngIf="tableMode==true">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let pregunta of preguntas | paginate:{ itemsPerPage: 2, currentPage: actualPage}; let i =index ">
+                <th *ngIf="tableMode==true" scope="row">{{ i + 1}}</th>
+                <td>
+                    <h2 class="text-dark" style="text-transform: uppercase;">{{pregunta.titulo}}</h2>
+                    <small *ngIf="pregunta.idUser != idSession" class="badge badge-secondary">Pregunta de
+                        {{pregunta.displayName}}</small>
+                    <small *ngIf="pregunta.idUser == idSession" class="badge badge-success">Pregunta de
+                        {{pregunta.displayName}}</small>
+                        <hr style="width: 80%;">
+                    <h5 style="margin-top: 1.5vw;" class="text-info">{{pregunta.descripcion}}</h5>
+                    <h4 style="margin-top: 1.8vw;">Respuestas</h4>
+
+                    <ul class="list-group list-group-flush">
+                        <li *ngFor="let respuesta of pregunta.respuestas | slice : startRes:resLimit; let j =index"
+                            class="list-group-item border border-dark" style="margin-bottom: 0.3vw;">
+                            <div class="container">
+                                <div class="col" >
+                                    <div class="row-sm-1" >
+                                        
+                                            <div class="container">
+                                                <div *ngIf="respuesta.respuesta!='Buenas tardes'"
+                                                    style="margin-left: 2.5vw;">
+                                                    <h5 class="display-5">Respuesta de {{respuesta.displayName}} <button
+                                                            style="margin-left: 1vw;" type="button"
+                                                            class="btn btn-danger btn-sm" (click)="darLike(pregunta, respuesta)"><i
+                                                                class="fas fa-thumbs-up"></i><small
+                                                                style="margin-left: 0.5vw;">{{respuesta.meGusta}}</small></button>
+                                                    </h5>
+                                                    <h6 class="text-info">{{respuesta.respuesta}}</h6>
+                                                </div>
+                                                <div *ngIf="respuesta.respuesta=='Buenas tardes'">
+                                                    <h5 class="text-dark">Aun no hay respuestas para esta pregunta.</h5>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div *ngIf="resLimit < pregunta.respuestas.length" class="container" style="margin-bottom: 1vw;">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <hr style="margin-top: 1rem; margin-bottom: 1rem;">
+                            </div>
+                            <div class="col-sm-4 align-self-center text-center">
+                                <h5 (click)="mostrarMasRespuestas()" style="cursor: pointer;">
+                                    <span class="badge badge-dark">Mostrar mas Respuestas</span>
+                                </h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <hr style="margin-top: 1rem; margin-bottom: 1rem;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="resLimit > limitMostrarMenos" class="container" style="margin-bottom: 1vw;">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <hr style="margin-top: 1rem; margin-bottom: 1rem;">
+                            </div>
+                            <div class="col-sm-4 align-self-center text-center">
+                                <h5 (click)="mostrarMenosRespuestas()" style="cursor: pointer;">
+                                    <span class="badge badge-dark">Mostrar menos Respuestas</span>
+                                </h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <hr style="margin-top: 1rem; margin-bottom: 1rem;">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" name="mansaje" [(ngModel)]="respuestaTxt"
+                        (keyup.enter)="enviarRespuesta(pregunta)" placeholder="Enviar Respuesta">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination-controls (pageChange)="actualPage = $event"></pagination-controls>
+</div>

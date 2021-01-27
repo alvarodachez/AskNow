@@ -1,0 +1,21 @@
+<div class="container" style="margin-top: 7vw;">
+    <div class="row justify-content-center">
+        <div class="col-sm-8 align-self-center text-center">
+            <h1>Bienvenido {{usuario.nombre}}</h1>
+            <ul class="list-group list-group-flush" style="margin-top: 1vw;">
+                <li class="list-group-item">
+                    <h4 class="text-secondary">El sitio perfecto para resolver tus dudas.</h4>
+                    
+                </li>
+                <li class="list-group-item">
+                    <h4 class="text-secondary">Comparte tus conocimientos y abrete a la comunidad en el chat.</h4>
+                </li>
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-outline-primary" (click)="irForo()">FORO</button>
+                    <button type="button" class="btn btn-outline-dark" style="margin-left: 1vw; margin-right: 1vw;" (click)="irAdministracion()">ADMINISTRACION</button>
+                    <button type="button" class="btn btn-outline-info" (click)="irChatear()">CHATEA</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a *ngIf="online == true" class="navbar-brand" [routerLink]="['/home']" style="margin-left: 1.5vw;">Ask Now</a>
+    <a *ngIf="online == false" class="navbar-brand" [routerLink]="['']" style="margin-left: 1.5vw;">Ask Now</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul *ngIf="online == true" class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/managment']">Administracion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/foro']">Foro</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/chat']">Chatea</a>
+            </li>
+
+        </ul>
+        <form *ngIf="online == true" class="form-inline my-2 my-lg-0" style="margin-right: 5vw; ">
+            <img src="{{usuario.photoURL}}" style="border-radius: 22px; width: 45px; height: 45px; margin-right: 2vw;" alt="userPhoto">
+            <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()"><i
+                    class="fas fa-power-off"></i></button>
+        </form>
+    </div>
+</nav>

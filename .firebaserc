@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "asknow-dfc50": {
+      "hosting": {
+        "asknow": [
+          "asknow-dfc50"
+        ]
+      }
+    }
+  }
+}
